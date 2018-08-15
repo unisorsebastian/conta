@@ -6,9 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ro.jmind.model.Document;
 import ro.jmind.model.DocumentNumber;
 import ro.jmind.repo.DocumentNumberRepository;
 import ro.jmind.repo.DocumentRepository;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping(path = "/doc")
@@ -17,7 +21,7 @@ public class DocumentController {
     @Autowired
     private DocumentRepository documentRepository;
     @Autowired
-    private DocumentNumberRepository docIdRepo;
+    private DocumentNumberRepository documentNumberRepository;
 
     @Value("${document.default.series}")
     private String series;
@@ -26,29 +30,37 @@ public class DocumentController {
     @GetMapping(path = "/next")
     public @ResponseBody
     DocumentNumber newDocId() {
-        DocumentNumber newDoc = docIdRepo.findAllByOrderByNumberDesc()
+        DocumentNumber documentNumber = documentNumberRepository.findAllByOrderByNumberDesc()
                 .stream()
                 .findFirst()
                 .orElse(null);
-        if (newDoc == null) {
-            newDoc = new DocumentNumber(1l, series);
+        if (documentNumber == null) {
+            documentNumber = new DocumentNumber(1l, series);
         } else {
-            newDoc = new DocumentNumber(newDoc.getNumber() + 1L, series);
+            documentNumber = new DocumentNumber(documentNumber.getNumber() + 1L, series);
         }
 
-        return docIdRepo.save(newDoc);
+        return documentNumberRepository.save(documentNumber);
+    }
+
+    @GetMapping(path = "/newDoc")
+    public @ResponseBody
+    Document newDoc() {
+        Document document = new Document();
+        document.setDescription("desc"+LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")));
+        return documentRepository.save(document);
     }
 
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<DocumentNumber> getAllDocs() {
-        return docIdRepo.findAll();
+        return documentNumberRepository.findAll();
     }
 
     @GetMapping(path = "/allString")
     public @ResponseBody
     String getAllDocsAsString() {
-        return docIdRepo.findAll().toString();
+        return documentNumberRepository.findAll().toString();
     }
 
 

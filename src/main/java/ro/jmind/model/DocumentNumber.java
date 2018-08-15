@@ -9,9 +9,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class DocumentNumber implements Serializable{
-//    @SequenceGenerator(name="SEQUENCE_GENERATOR",sequenceName="SEQ_DOC")
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+public class DocumentNumber implements Serializable {
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "document_number_generator")
+//    @SequenceGenerator(name = "document_number_generator", sequenceName = "document_number_seq", allocationSize = 50)
+//    @GeneratedValue(strategy = GenerationType.TABLE, generator = "document_number_generator")
+//    @TableGenerator(name="document_number_generator", table="id_generator", schema="jmind_dev")
     @Id
     private Long number;
 
