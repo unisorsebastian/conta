@@ -1,17 +1,14 @@
 package ro.jmind.model;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import javax.annotation.Generated;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class DocumentNumber implements Serializable{
-//    @SequenceGenerator(name="SEQUENCE_GENERATOR",sequenceName="SEQ_DOC")
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+public class InvoiceNumber implements Serializable{
     @Id
     private Long number;
 
@@ -21,17 +18,17 @@ public class DocumentNumber implements Serializable{
     @OneToOne
     private Document document;
 
-    public DocumentNumber() {
+    public InvoiceNumber() {
     }
 
-    public DocumentNumber(Long number, @NotNull String series) {
+    public InvoiceNumber(Long number, @NotNull String series) {
         this.number = number;
         this.series = series;
     }
 
     @Override
     public String toString() {
-        return "DocumentNumber{" +
+        return "InvoiceNumber{" +
                 "number=" + number +
                 ", series='" + series + '\'' +
                 '}';
@@ -41,7 +38,7 @@ public class DocumentNumber implements Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DocumentNumber that = (DocumentNumber) o;
+        InvoiceNumber that = (InvoiceNumber) o;
         return Objects.equals(number, that.number) &&
                 Objects.equals(series, that.series);
     }
@@ -59,4 +56,11 @@ public class DocumentNumber implements Serializable{
         return series;
     }
 
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
 }

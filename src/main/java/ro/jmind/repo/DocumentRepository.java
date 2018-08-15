@@ -6,4 +6,5 @@ import ro.jmind.model.Document;
 
 @Repository
 public interface DocumentRepository extends CrudRepository<Document, Long> {
+
 }
