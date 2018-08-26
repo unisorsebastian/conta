@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ro.jmind.model.Document;
+import ro.jmind.model.InvoiceDetails;
 import ro.jmind.model.InvoiceNumber;
 import ro.jmind.repo.DocumentRepositoryCustom;
+import ro.jmind.repo.InvoiceDetailsRepository;
 import ro.jmind.repo.InvoiceNumberRepository;
 import ro.jmind.repo.DocumentRepository;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "/doc")
@@ -27,7 +27,9 @@ public class DocumentController {
     @Autowired
     private DocumentRepositoryCustom documentRepositoryCustom;
     @Autowired
-    private InvoiceNumberRepository docIdRepo;
+    private InvoiceNumberRepository invoiceNumberRepository;
+    @Autowired
+    private InvoiceDetailsRepository invoiceDetailsRepository;
 
     @Value("${document.default.series}")
     private String series;
@@ -36,7 +38,7 @@ public class DocumentController {
     @GetMapping(path = "/next")
     public @ResponseBody
     InvoiceNumber newDocId() {
-        InvoiceNumber newDoc = docIdRepo.findAllByOrderByNumberDesc()
+        InvoiceNumber newDoc = invoiceNumberRepository.findAllByOrderByNumberDesc()
                 .stream()
                 .findFirst()
                 .orElse(null);
@@ -46,7 +48,7 @@ public class DocumentController {
             newDoc = new InvoiceNumber(newDoc.getNumber() + 1L, series);
         }
 
-        return docIdRepo.save(newDoc);
+        return invoiceNumberRepository.save(newDoc);
     }
 
     @GetMapping(path = "/newDocument")
@@ -60,16 +62,24 @@ public class DocumentController {
         return save;
     }
 
+    @GetMapping(path = "/allInvoiceDetails")
+    public @ResponseBody
+    Iterable<InvoiceDetails> getAllInvoiceDetails() {
+        Iterable<InvoiceDetails> all = invoiceDetailsRepository.findAll();
+        return all;
+    }
+
+
     @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<InvoiceNumber> getAllDocs() {
-        return docIdRepo.findAll();
+        return invoiceNumberRepository.findAll();
     }
 
     @GetMapping(path = "/allString")
     public @ResponseBody
     String getAllDocsAsString() {
-        return docIdRepo.findAll().toString();
+        return invoiceNumberRepository.findAll().toString();
     }
 
 
