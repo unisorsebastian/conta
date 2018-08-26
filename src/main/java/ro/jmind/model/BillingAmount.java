@@ -1,5 +1,6 @@
 package ro.jmind.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,10 +14,13 @@ public class BillingAmount {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(precision = 19, scale = 4, columnDefinition="DECIMAL(19,4)")
     private BigDecimal amount;
+    @Column(precision = 19, scale = 4, columnDefinition="DECIMAL(19,4)")
     private BigDecimal localAmount;
     private Currency currency;
     private Currency localCurrency;
+    @Column(precision = 19, scale = 4, columnDefinition="DECIMAL(19,4)")
     private BigDecimal parity;
     private LocalDate exchangeDate;
 
