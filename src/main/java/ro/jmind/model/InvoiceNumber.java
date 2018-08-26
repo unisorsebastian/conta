@@ -1,22 +1,23 @@
 package ro.jmind.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class InvoiceNumber implements Serializable{
+public class InvoiceNumber implements Serializable {
     @Id
     private Long number;
-
     @NotNull
     private String series;
-
     @OneToOne
-    private Document document;
+    @JoinColumn(name="invoiceFK")
+    @JsonBackReference
+    private Invoice invoice;
+
 
     public InvoiceNumber() {
     }
@@ -56,11 +57,11 @@ public class InvoiceNumber implements Serializable{
         return series;
     }
 
-    public Document getDocument() {
-        return document;
+    public Invoice getInvoice() {
+        return invoice;
     }
 
-    public void setDocument(Document document) {
-        this.document = document;
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 }

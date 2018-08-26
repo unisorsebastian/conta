@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface InvoiceNumberRepository extends CrudRepository<InvoiceNumber, Long> {
     List<InvoiceNumber> findAllByOrderByNumberDesc();
+
     List<InvoiceNumber> findAllByOrderByNumberAsc();
 }

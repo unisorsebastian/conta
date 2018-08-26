@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@ComponentScan(basePackages = {"ro.jmind.controller", "ro.jmind.app","ro.jmind.repo"})
+@ComponentScan(basePackages = {"ro.jmind.controller", "ro.jmind.app", "ro.jmind.repo"})
 @SpringBootApplication
 @EntityScan(basePackages = "ro.jmind.model")
 @EnableJpaRepositories({"ro.jmind.repo"})
