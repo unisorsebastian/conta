@@ -4,15 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ro.jmind.app.CoreProperties;
-import ro.jmind.model.BillingAmount;
-import ro.jmind.model.ExchangeRate;
 import ro.jmind.model.Invoice;
 import ro.jmind.model.InvoiceNumber;
 import ro.jmind.repo.*;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Controller
 @RequestMapping(path = "/Invoice")

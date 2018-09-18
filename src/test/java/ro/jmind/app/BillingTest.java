@@ -1,15 +1,5 @@
 package ro.jmind.app;
 
-import org.junit.Test;
-import ro.jmind.model.BillingAmount;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Currency;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 public class BillingTest {
 
 //    @Test

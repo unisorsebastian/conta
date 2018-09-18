@@ -22,13 +22,13 @@ public class Invoice implements Serializable {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="invoiceNoFK")
+    @JoinColumn(name = "invoiceNoFK")
     @JsonManagedReference
     private InvoiceNumber invoiceNumber;
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="amountFK")
+    @JoinColumn(name = "amountFK")
     private BillingAmount amount;
 
     @Override
