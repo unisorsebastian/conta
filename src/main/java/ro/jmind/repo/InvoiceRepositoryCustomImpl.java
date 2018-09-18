@@ -14,7 +14,7 @@ public class InvoiceRepositoryCustomImpl implements InvoiceRepositoryCustom {
     private final InvoiceRepository invoiceRepository;
     private final InvoiceNumberRepository invoiceNumberRepository;
 
-    @Value("${document.default.series}")
+    @Value("${core.document.default.series}")
     private String series;
 
     public InvoiceRepositoryCustomImpl(InvoiceRepository invoiceRepository, InvoiceNumberRepository invoiceNumberRepository) {

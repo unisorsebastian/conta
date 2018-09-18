@@ -1,94 +1,65 @@
 package ro.jmind.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Currency;
+import java.util.Objects;
 
 @Entity
-public class BillingAmount {
+@Getter
+@Setter
+public class BillingAmount implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(precision = 19, scale = 4, columnDefinition="DECIMAL(19,4)")
+    @Column(precision = 19, scale = 4, columnDefinition = "DECIMAL(19,4)")
     private BigDecimal amount;
-    @Column(precision = 19, scale = 4, columnDefinition="DECIMAL(19,4)")
-    private BigDecimal localAmount;
-    private Currency currency;
-    private Currency localCurrency;
-    @Column(precision = 19, scale = 4, columnDefinition="DECIMAL(19,4)")
-    private BigDecimal parity;
-    private LocalDate exchangeDate;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private ExchangeRate exchangeRate;
 
     public BillingAmount() {
     }
 
-    public BillingAmount(String amount, String parity, String exchangeDate) {
-        this.amount = new BigDecimal(amount);
-        this.parity = new BigDecimal(parity);
-        this.exchangeDate = LocalDate.parse(exchangeDate, DateTimeFormatter.ofPattern("yyyyMMdd"));
-        this.localAmount = this.amount.multiply(this.parity);
-        this.localCurrency = Currency.getInstance("RON");
-        this.currency = Currency.getInstance("EUR");
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public BillingAmount(Long id, BigDecimal amount, ExchangeRate exchangeRate) {
         this.id = id;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
         this.amount = amount;
+        this.exchangeRate = exchangeRate;
     }
 
-    public BigDecimal getLocalAmount() {
-        return localAmount;
+    public BillingAmount(BigDecimal amount, ExchangeRate exchangeRate) {
+        this.amount = amount;
+        this.exchangeRate = exchangeRate;
     }
 
-    public void setLocalAmount(BigDecimal localAmount) {
-        this.localAmount = localAmount;
+    public BillingAmount(String amount, ExchangeRate exchangeRate) {
+        this.amount = new BigDecimal(amount);
+        this.exchangeRate = exchangeRate;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    @Override
+    public String toString() {
+        return "BillingAmount{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", exchangeRate=" + exchangeRate +
+                '}';
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BillingAmount that = (BillingAmount) o;
+        return Objects.equals(amount, that.amount) &&
+                Objects.equals(exchangeRate, that.exchangeRate);
     }
 
-    public Currency getLocalCurrency() {
-        return localCurrency;
-    }
-
-    public void setLocalCurrency(Currency localCurrency) {
-        this.localCurrency = localCurrency;
-    }
-
-    public BigDecimal getParity() {
-        return parity;
-    }
-
-    public void setParity(BigDecimal parity) {
-        this.parity = parity;
-    }
-
-    public LocalDate getExchangeDate() {
-        return exchangeDate;
-    }
-
-    public void setExchangeDate(LocalDate exchangeDate) {
-        this.exchangeDate = exchangeDate;
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount, exchangeRate);
     }
 }

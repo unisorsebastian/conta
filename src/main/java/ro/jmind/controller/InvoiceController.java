@@ -2,23 +2,20 @@ package ro.jmind.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import ro.jmind.app.CoreProperties;
 import ro.jmind.model.BillingAmount;
+import ro.jmind.model.ExchangeRate;
 import ro.jmind.model.Invoice;
 import ro.jmind.model.InvoiceNumber;
-import ro.jmind.repo.InvoiceNumberRepository;
-import ro.jmind.repo.InvoiceRepository;
-import ro.jmind.repo.InvoiceRepositoryCustom;
+import ro.jmind.repo.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Controller
-@RequestMapping(path = "/invoice")
+@RequestMapping(path = "/Invoice")
 public class InvoiceController {
 
     @Autowired
@@ -27,35 +24,53 @@ public class InvoiceController {
     private InvoiceRepositoryCustom invoiceRepositoryCustom;
     @Autowired
     private InvoiceNumberRepository invoiceNumberRepository;
+    @Autowired
+    private ExchangeRateRepositoryCustom exchangeRateRepositoryCustom;
+    @Autowired
+    private ExchangeRateRepository exchangeRateRepository;
+    @Autowired
+    private CoreProperties coreProperties;
 
 
-
-    @GetMapping(path = "/new")
+    @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    Invoice newDocument() {
-        String formattedDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        BillingAmount amount = new BillingAmount("22.3","4.6543","20180831");
-
-        Invoice invoice = new Invoice();
-        invoice.setDescription(formattedDate);
-        invoice.setAmount(amount);
-
-
+    Invoice createInvoice(@RequestBody Invoice invoice) {
         Invoice save = invoiceRepositoryCustom.save(invoice);
-        System.out.println(save);
-        invoice = new Invoice();
-        invoice.setDescription(formattedDate);
-        invoice.setAmount(amount);
-        save = invoiceRepositoryCustom.save(invoice);
-
         return save;
     }
 
+//    @RequestMapping(method = RequestMethod.POST)
+//    public @ResponseBody
+//    Invoice createInvoice(@RequestBody BillingAmount amount) {
+//        ExchangeRate rate = amount.getExchangeRate();
+//        List<ExchangeRate> allByExchangeRate = exchangeRateRepository
+//                .findAllByCurrencyAndLocalCurrencyAndAndParityAndExchangeDate(rate.getCurrency(),
+//                        rate.getLocalCurrency(),
+//                        rate.getParity(),
+//                        rate.getExchangeDate());
+//
+//        ExchangeRate exchangeRate = allByExchangeRate.stream().findFirst().orElse(rate);
+//
+//        Invoice invoice = new Invoice();
+//
+//        invoice.setDate(rate.getExchangeDate());
+//        invoice.setAmount(amount);
+//
+//        Invoice save = invoiceRepositoryCustom.save(invoice);
+//
+//        return save;
+//    }
 
-    @GetMapping(path = "/allInvoice")
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    Iterable<Invoice> getAllInvoice() {
-        return invoiceRepository.findAllByOrderByIdDesc();
+    Invoice getInvoice(@PathVariable Long id) {
+        return invoiceRepository.findById(id).orElse(null);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody
+    Iterable<Invoice> getAllInvoices() {
+        return invoiceRepository.findAll();
     }
 
     @GetMapping(path = "/allInvoiceNumber")
@@ -64,19 +79,6 @@ public class InvoiceController {
         Iterable<InvoiceNumber> all = invoiceNumberRepository.findAll();
         System.out.println(all);
         return all;
-    }
-
-
-//    @GetMapping(path = "/all")
-//    public @ResponseBody
-//    Iterable<Bill> getAllBills() {
-//        return billRepository.findAll();
-//    }
-
-    @GetMapping(path = "/test")
-    public @ResponseBody
-    String test() {
-        return "ok";
     }
 
 

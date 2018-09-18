@@ -1,0 +1,20 @@
+{
+  "id": 53,
+  "description": "2018-09-18",
+  "date": "2018-09-18",
+  "invoiceNumber": {
+    "number": 3,
+    "series": "JMD"
+  },
+  "amount": {
+    "id": 4,
+    "amount": 4400,
+    "exchangeRate": {
+      "id": 2,
+      "currency": "EUR",
+      "localCurrency": "RON",
+      "parity": 4.6755,
+      "exchangeDate": "2018-08-31"
+    }
+  }
+}

@@ -1,6 +1,8 @@
 package ro.jmind.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +10,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
 public class Invoice implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "invoice_generator")
@@ -18,52 +22,14 @@ public class Invoice implements Serializable {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="invoicenoFK")
+    @JoinColumn(name="invoiceNoFK")
     @JsonManagedReference
     private InvoiceNumber invoiceNumber;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="amountFK")
     private BillingAmount amount;
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public BillingAmount getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BillingAmount amount) {
-        this.amount = amount;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public InvoiceNumber getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public void setInvoiceNumber(InvoiceNumber invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
-    }
 
     @Override
     public String toString() {

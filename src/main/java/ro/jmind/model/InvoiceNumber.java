@@ -1,20 +1,27 @@
 package ro.jmind.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
 public class InvoiceNumber implements Serializable {
     @Id
     private Long number;
     @NotNull
     private String series;
     @OneToOne
-    @JoinColumn(name="invoiceFK")
+    @JoinColumn(name = "invoiceFK")
     @JsonBackReference
     private Invoice invoice;
 
@@ -49,19 +56,4 @@ public class InvoiceNumber implements Serializable {
         return Objects.hash(number, series);
     }
 
-    public Long getNumber() {
-        return number;
-    }
-
-    public String getSeries() {
-        return series;
-    }
-
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
-    }
 }
