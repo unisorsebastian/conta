@@ -29,13 +29,16 @@ public class Invoice implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "amountFK")
-    private BillingAmount amount;
+    private BillingAmount billingAmount;
 
     @Override
     public String toString() {
         return "Invoice{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
+                ", date=" + date +
+                ", invoiceNumber=" + invoiceNumber +
+                ", billingAmount=" + billingAmount +
                 '}';
     }
 

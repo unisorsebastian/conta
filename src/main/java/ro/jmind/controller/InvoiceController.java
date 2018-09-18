@@ -7,6 +7,9 @@ import ro.jmind.app.CoreProperties;
 import ro.jmind.model.Invoice;
 import ro.jmind.model.InvoiceNumber;
 import ro.jmind.repo.*;
+import ro.jmind.service.ExcelService;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping(path = "/Invoice")
@@ -25,6 +28,25 @@ public class InvoiceController {
     @Autowired
     private CoreProperties coreProperties;
 
+    @Autowired
+    private ExcelService excelService;
+
+
+    @GetMapping("/excel/invoice/{id}")
+    public @ResponseBody
+    Invoice generateInvoice(@PathVariable Long id) throws IOException {
+        Invoice invoice = getInvoice(id);
+        excelService.generateInvoice(invoice);
+        return invoice;
+    }
+
+    @GetMapping("/excel/template/{id}")
+    public @ResponseBody
+    Invoice generateTemplate(@PathVariable Long id) throws IOException {
+        Invoice invoice = getInvoice(id);
+        excelService.generateInvoice(invoice);
+        return invoice;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
@@ -35,8 +57,8 @@ public class InvoiceController {
 
 //    @RequestMapping(method = RequestMethod.POST)
 //    public @ResponseBody
-//    Invoice createInvoice(@RequestBody BillingAmount amount) {
-//        ExchangeRate rate = amount.getExchangeRate();
+//    Invoice createInvoice(@RequestBody BillingAmount billingAmount) {
+//        ExchangeRate rate = billingAmount.getExchangeRate();
 //        List<ExchangeRate> allByExchangeRate = exchangeRateRepository
 //                .findAllByCurrencyAndLocalCurrencyAndAndParityAndExchangeDate(rate.getCurrency(),
 //                        rate.getLocalCurrency(),
@@ -48,7 +70,7 @@ public class InvoiceController {
 //        Invoice invoice = new Invoice();
 //
 //        invoice.setDate(rate.getExchangeDate());
-//        invoice.setAmount(amount);
+//        invoice.setBillingAmount(billingAmount);
 //
 //        Invoice save = invoiceRepositoryCustom.save(invoice);
 //

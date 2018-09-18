@@ -44,7 +44,7 @@ public class BillingAmount implements Serializable {
     public String toString() {
         return "BillingAmount{" +
                 "id=" + id +
-                ", amount=" + amount +
+                ", billingAmount=" + amount +
                 ", exchangeRate=" + exchangeRate +
                 '}';
     }

@@ -39,6 +39,7 @@ public class InvoiceNumber implements Serializable {
         return "InvoiceNumber{" +
                 "number=" + number +
                 ", series='" + series + '\'' +
+                ", invoice=" + invoice +
                 '}';
     }
 
