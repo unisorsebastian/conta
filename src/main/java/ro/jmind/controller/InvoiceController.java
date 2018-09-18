@@ -29,6 +29,7 @@ public class InvoiceController {
     private InvoiceNumberRepository invoiceNumberRepository;
 
 
+
     @GetMapping(path = "/new")
     public @ResponseBody
     Invoice newDocument() {
@@ -41,6 +42,11 @@ public class InvoiceController {
 
 
         Invoice save = invoiceRepositoryCustom.save(invoice);
+        System.out.println(save);
+        invoice = new Invoice();
+        invoice.setDescription(formattedDate);
+        invoice.setAmount(amount);
+        save = invoiceRepositoryCustom.save(invoice);
 
         return save;
     }
@@ -56,6 +62,7 @@ public class InvoiceController {
     public @ResponseBody
     Iterable<InvoiceNumber> getAllInvoiceNumber() {
         Iterable<InvoiceNumber> all = invoiceNumberRepository.findAll();
+        System.out.println(all);
         return all;
     }
 
