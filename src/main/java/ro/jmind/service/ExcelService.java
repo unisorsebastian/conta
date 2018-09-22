@@ -5,11 +5,13 @@ import lombok.Setter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ro.jmind.model.BillingAmount;
 import ro.jmind.model.ExchangeRate;
 import ro.jmind.model.Invoice;
+import ro.jmind.repo.InvoiceRepository;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +35,9 @@ public class ExcelService {
     private String billSheet;
     @Value("${core.document.excel.out.location}")
     private String outLocation;
+
+    @Autowired
+    private InvoiceRepository invoiceRepository;
 
 
     public void generateInvoice(Invoice invoice) throws IOException {
@@ -92,5 +97,9 @@ public class ExcelService {
         FileOutputStream outFile = new FileOutputStream(new File(finalFile));
         workbook.write(outFile);
         outFile.close();
+    }
+
+    public Invoice getInvoice(Long id) {
+        return invoiceRepository.findById(id).orElse(null);
     }
 }

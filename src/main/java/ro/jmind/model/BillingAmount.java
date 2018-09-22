@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 @Entity
@@ -24,21 +25,17 @@ public class BillingAmount implements Serializable {
     public BillingAmount() {
     }
 
-    public BillingAmount(Long id, BigDecimal amount, ExchangeRate exchangeRate) {
+    public BillingAmount(Long id, String amount, ExchangeRate exchangeRate) {
         this.id = id;
-        this.amount = amount;
-        this.exchangeRate = exchangeRate;
-    }
-
-    public BillingAmount(BigDecimal amount, ExchangeRate exchangeRate) {
-        this.amount = amount;
+        this.amount = new BigDecimal(amount).setScale(4, RoundingMode.HALF_EVEN);
         this.exchangeRate = exchangeRate;
     }
 
     public BillingAmount(String amount, ExchangeRate exchangeRate) {
-        this.amount = new BigDecimal(amount);
+        this.amount = new BigDecimal(amount).setScale(4, RoundingMode.HALF_EVEN);
         this.exchangeRate = exchangeRate;
     }
+
 
     @Override
     public String toString() {

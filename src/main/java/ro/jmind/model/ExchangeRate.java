@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Currency;
@@ -31,18 +32,18 @@ public class ExchangeRate implements Serializable {
     public ExchangeRate() {
     }
 
-    public ExchangeRate(Long id, Currency currency, Currency localCurrency, BigDecimal parity, LocalDate exchangeDate) {
+    public ExchangeRate(Long id, Currency currency, Currency localCurrency, String parity, LocalDate exchangeDate) {
         this.id = id;
         this.currency = currency;
         this.localCurrency = localCurrency;
-        this.parity = parity;
+        this.parity = new BigDecimal(parity).setScale(4, RoundingMode.HALF_EVEN);
         this.exchangeDate = exchangeDate;
     }
 
-    public ExchangeRate(Currency currency, Currency localCurrency, BigDecimal parity, LocalDate exchangeDate) {
+    public ExchangeRate(Currency currency, Currency localCurrency, String parity, LocalDate exchangeDate) {
         this.currency = currency;
         this.localCurrency = localCurrency;
-        this.parity = parity;
+        this.parity = new BigDecimal(parity).setScale(4, RoundingMode.HALF_EVEN);
         this.exchangeDate = exchangeDate;
     }
 

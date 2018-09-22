@@ -1,6 +1,5 @@
 package ro.jmind.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,26 +8,26 @@ import ro.jmind.model.ExchangeRate;
 import ro.jmind.repo.ExchangeRateRepository;
 import ro.jmind.repo.ExchangeRateRepositoryCustom;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Currency;
 
 @Controller
-@RequestMapping(path = "/exchangeRate")
+@RequestMapping(path = "/ExchangeRate")
 public class ExchangeRateController {
-
-    @Autowired
     private ExchangeRateRepository exchangeRateRepository;
-    @Autowired
     private ExchangeRateRepositoryCustom exchangeRateRepositoryCustom;
 
+    public ExchangeRateController(ExchangeRateRepository exchangeRateRepository, ExchangeRateRepositoryCustom exchangeRateRepositoryCustom) {
+        this.exchangeRateRepository = exchangeRateRepository;
+        this.exchangeRateRepositoryCustom = exchangeRateRepositoryCustom;
+    }
 
     @GetMapping(path = "/new")
     public @ResponseBody
     ExchangeRate newExchangeRate() {
         String formattedDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        ExchangeRate exchangeRate = new ExchangeRate(Currency.getInstance("EUR"), Currency.getInstance("RON"), new BigDecimal("4.6543"), LocalDate.now());
+        ExchangeRate exchangeRate = new ExchangeRate(Currency.getInstance("EUR"), Currency.getInstance("RON"), "4.6543", LocalDate.now());
         exchangeRateRepository.save(exchangeRate);
         exchangeRateRepositoryCustom.save(exchangeRate);
         return exchangeRate;

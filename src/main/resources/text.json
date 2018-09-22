@@ -18,3 +18,14 @@
     }
   }
 }
+
+{
+  "id": {
+    "id": 22,
+    "version": 1
+  },
+  "date": "2018-08-01",
+  "hours": null,
+  "rate": null,
+  "description": "day1"
+}
