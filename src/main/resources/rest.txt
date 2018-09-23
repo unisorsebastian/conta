@@ -1,0 +1,10 @@
+---- BillableDay ----
+GET  /BillableDay
+GET  /BillableDay/id/{id}
+GET  /BillableDay/date/{dateAsString}
+POST /BillableDay
+
+---- Invoice ----
+GET  /Invoice
+GET  /Invoice/id/{id}
+POST /Invoice

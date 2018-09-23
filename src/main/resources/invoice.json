@@ -1,0 +1,13 @@
+{
+  "description": "2018-09-18",
+  "date": "2018-09-18",
+  "billingAmount": {
+    "amount": 4400,
+    "exchangeRate": {
+      "currency": "EUR",
+      "localCurrency": "RON",
+      "parity": 4.6755,
+      "exchangeDate": "2018-08-31"
+    }
+  }
+}

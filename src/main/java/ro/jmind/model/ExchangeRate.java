@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -19,7 +18,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-public class ExchangeRate implements Serializable {
+public class ExchangeRate {
     @Id
     @GeneratedValue
     private Long id;
@@ -32,27 +31,27 @@ public class ExchangeRate implements Serializable {
     public ExchangeRate() {
     }
 
-    public ExchangeRate(Long id, Currency currency, Currency localCurrency, String parity, LocalDate exchangeDate) {
-        this.id = id;
-        this.currency = currency;
-        this.localCurrency = localCurrency;
-        this.parity = new BigDecimal(parity).setScale(4, RoundingMode.HALF_EVEN);
-        this.exchangeDate = exchangeDate;
-    }
-
-    public ExchangeRate(Currency currency, Currency localCurrency, String parity, LocalDate exchangeDate) {
-        this.currency = currency;
-        this.localCurrency = localCurrency;
-        this.parity = new BigDecimal(parity).setScale(4, RoundingMode.HALF_EVEN);
-        this.exchangeDate = exchangeDate;
-    }
+//    public ExchangeRate(Long id, Currency currency, Currency localCurrency, String parity, LocalDate exchangeDate) {
+//        this.id = id;
+//        this.currency = currency;
+//        this.localCurrency = localCurrency;
+//        this.parity = new BigDecimal(parity).setScale(4, RoundingMode.HALF_EVEN);
+//        this.exchangeDate = exchangeDate;
+//    }
+//
+//    public ExchangeRate(Currency currency, Currency localCurrency, String parity, LocalDate exchangeDate) {
+//        this.currency = currency;
+//        this.localCurrency = localCurrency;
+//        this.parity = new BigDecimal(parity).setScale(4, RoundingMode.HALF_EVEN);
+//        this.exchangeDate = exchangeDate;
+//    }
 
     public ExchangeRate(String currency, String localCurrency, String parity, String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(date, formatter);
         this.currency = Currency.getInstance(currency);
         this.localCurrency = Currency.getInstance(localCurrency);
-        this.parity = new BigDecimal(parity);
+        this.parity = new BigDecimal(parity).setScale(4, RoundingMode.HALF_EVEN);
         this.exchangeDate = localDate;
     }
 

@@ -7,13 +7,14 @@ import ro.jmind.model.ExchangeRate;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Currency;
-import java.util.List;
 
 @Repository
 public interface ExchangeRateRepository extends CrudRepository<ExchangeRate, Long> {
-//    List<ExchangeRate> findAllByExchangeDateDesc();
+    Iterable<ExchangeRate> findAll();
 
-    List<ExchangeRate> findAll();
+    Iterable<ExchangeRate> findAllByCurrencyAndLocalCurrencyAndParityAndExchangeDate(Currency currency, Currency localCurrency, BigDecimal parity, LocalDate exchangeDate);
 
-    List<ExchangeRate> findAllByCurrencyAndLocalCurrencyAndAndParityAndExchangeDate(Currency currency, Currency localCurrency, BigDecimal parity, LocalDate exchangeDate);
+    ExchangeRate findFirstByCurrencyAndLocalCurrencyAndParityAndExchangeDate(Currency currency, Currency localCurrency, BigDecimal parity, LocalDate exchangeDate);
+
+    Iterable<ExchangeRate> findAllByExchangeDate(LocalDate exchangeDate);
 }

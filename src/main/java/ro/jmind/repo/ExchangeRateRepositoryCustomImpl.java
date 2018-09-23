@@ -5,10 +5,6 @@ import org.springframework.stereotype.Repository;
 import ro.jmind.model.ExchangeRate;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Currency;
-import java.util.List;
 
 @Repository("exchangeRateRepositoryCustomImpl")
 public class ExchangeRateRepositoryCustomImpl implements ExchangeRateRepositoryCustom {
@@ -22,25 +18,19 @@ public class ExchangeRateRepositoryCustomImpl implements ExchangeRateRepositoryC
     @Override
     @Transactional
     public ExchangeRate save(ExchangeRate exchangeRate) {
-//        if (exchangeRate == null) {
-//            throw new RuntimeException("exchangeRate is null");
-//        }
-//        List<ExchangeRate> allByExchangeRate = exchangeRateRepository
-//                .findAllByCurrencyAndLocalCurrencyAndAndParityAndExchangeDate(exchangeRate.getCurrency(),
-//                        exchangeRate.getLocalCurrency(),
-//                        exchangeRate.getParity(),
-//                        exchangeRate.getExchangeDate());
+        if (exchangeRate == null) {
+            throw new RuntimeException("exchangeRate is null");
+        }
+        ExchangeRate found = exchangeRateRepository
+                .findFirstByCurrencyAndLocalCurrencyAndParityAndExchangeDate(exchangeRate.getCurrency(),
+                        exchangeRate.getLocalCurrency(),
+                        exchangeRate.getParity(),
+                        exchangeRate.getExchangeDate());
+        if (found == null) {
+            found = exchangeRateRepository.save(exchangeRate);
+        }
 
-        return null;
-    }
-
-    @Override
-    public List<ExchangeRate> findAllByCurrencyAndLocalCurrencyAndAndParityAndExchangeDate(Currency currency, Currency localCurrency, BigDecimal parity, LocalDate exchangeDate) {
-        return exchangeRateRepository
-                .findAllByCurrencyAndLocalCurrencyAndAndParityAndExchangeDate(currency,
-                        localCurrency,
-                        parity,
-                        exchangeDate);
+        return found;
     }
 
 

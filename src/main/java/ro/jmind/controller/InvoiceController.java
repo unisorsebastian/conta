@@ -31,18 +31,10 @@ public class InvoiceController {
         return invoiceRepository.findAll();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/id/{id}")
     public @ResponseBody
     Invoice getInvoice(@PathVariable Long id) {
         return invoiceRepository.findById(id).orElse(null);
-    }
-
-    @GetMapping(path = "/allInvoiceNumber")
-    public @ResponseBody
-    Iterable<InvoiceNumber> getAllInvoiceNumber() {
-        Iterable<InvoiceNumber> all = invoiceNumberRepository.findAll();
-        System.out.println(all);
-        return all;
     }
 
     @PostMapping(path = "")
