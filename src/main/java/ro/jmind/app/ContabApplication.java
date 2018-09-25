@@ -2,15 +2,10 @@ package ro.jmind.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-@ComponentScan(basePackages = {"ro.jmind.controller", "ro.jmind.app", "ro.jmind.repo", "ro.jmind.service"})
 @SpringBootApplication
-@EntityScan(basePackages = "ro.jmind.model")
-@EnableJpaRepositories({"ro.jmind.repo"})
-public class ContabApplication {
+public class ContabApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(ContabApplication.class, args);

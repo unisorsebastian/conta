@@ -1,5 +1,6 @@
 package ro.jmind.app;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import ro.jmind.model.BigDecimalWrapper;
 
@@ -9,6 +10,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class BigDecimalTest {
+    @Ignore
     @Test
     public void bigDecimalWrapperTest() {
         BigDecimal bd1 = new BigDecimal("3.21");

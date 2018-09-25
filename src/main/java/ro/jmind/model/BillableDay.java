@@ -10,6 +10,7 @@ import javax.persistence.Version;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -33,5 +34,23 @@ public class BillableDay {
         this.hours = new BigDecimal(hours).setScale(4, RoundingMode.HALF_EVEN);
         this.rate = new BigDecimal(rate).setScale(4, RoundingMode.HALF_EVEN);
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BillableDay that = (BillableDay) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(date, that.date) &&
+                Objects.equals(hours, that.hours) &&
+                Objects.equals(rate, that.rate) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(version, that.version);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date, hours, rate, description, version);
     }
 }

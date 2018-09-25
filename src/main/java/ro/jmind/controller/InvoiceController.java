@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ro.jmind.app.CoreProperties;
 import ro.jmind.model.Invoice;
-import ro.jmind.model.InvoiceNumber;
 import ro.jmind.repo.InvoiceNumberRepository;
 import ro.jmind.repo.InvoiceRepository;
 import ro.jmind.repo.InvoiceRepositoryCustom;
