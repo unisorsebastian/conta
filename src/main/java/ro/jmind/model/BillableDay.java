@@ -10,12 +10,13 @@ import javax.persistence.Version;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
-public class BillableDay {
+public class BillableDay implements Comparable<BillableDay> {
     @Id
     @GeneratedValue
     private Long id;
@@ -34,6 +35,11 @@ public class BillableDay {
         this.hours = new BigDecimal(hours).setScale(4, RoundingMode.HALF_EVEN);
         this.rate = new BigDecimal(rate).setScale(4, RoundingMode.HALF_EVEN);
         this.description = description;
+    }
+
+    @Override
+    public int compareTo(BillableDay o) {
+        return this.getDate().compareTo(o.getDate());
     }
 
     @Override

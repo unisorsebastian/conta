@@ -35,28 +35,28 @@ public class TimesheetController {
 
         Timesheet timesheet = timesheetRepository.findById(firstDay).orElse(new Timesheet());
 
-        Comparator<BillableDay> bdc = (o1, o2) -> o1.getDate().compareTo(o2.getDate());
-        Set<BillableDay> worked = new TreeSet<>(bdc);
-
-
-        timesheet.setBillableDays(worked);
-        timesheet.setDate(firstDay);
-
-        LocalDate tmp = firstDay;
-        BillableDay billableDay;
-        while (true) {
-            DayOfWeek dayOfWeek = tmp.getDayOfWeek();
-            if (dayOfWeek.equals(DayOfWeek.SATURDAY) || dayOfWeek.equals(DayOfWeek.SUNDAY)) {
-                billableDay = new BillableDay(tmp, "0", "0", "weekend");
-            } else {
-                billableDay = new BillableDay(tmp, "8", "25", "full day");
-            }
-            worked.add(billableDay);
-            if (tmp.isEqual(lastDay)) {
-                break;
-            }
-            tmp = tmp.plusDays(1);
-        }
+//        Comparator<BillableDay> bdc = (o1, o2) -> o1.getDate().compareTo(o2.getDate());
+//        Set<BillableDay> worked = new TreeSet<>(bdc);
+//
+//
+//        timesheet.setBillableDays(worked);
+//        timesheet.setDate(firstDay);
+//
+//        LocalDate tmp = firstDay;
+//        BillableDay billableDay;
+//        while (true) {
+//            DayOfWeek dayOfWeek = tmp.getDayOfWeek();
+//            if (dayOfWeek.equals(DayOfWeek.SATURDAY) || dayOfWeek.equals(DayOfWeek.SUNDAY)) {
+//                billableDay = new BillableDay(tmp, "0", "0", "weekend");
+//            } else {
+//                billableDay = new BillableDay(tmp, "8", "25", "full day");
+//            }
+//            worked.add(billableDay);
+//            if (tmp.isEqual(lastDay)) {
+//                break;
+//            }
+//            tmp = tmp.plusDays(1);
+//        }
         return timesheetRepository.save(timesheet);
     }
 

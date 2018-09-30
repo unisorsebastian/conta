@@ -16,7 +16,10 @@ public class BillableDayRepositoryCustromImpl implements BillableDayRepositoryCu
         BillableDay recent = billableDayRepository.findFirstBillableDayByDateOrderByVersionDesc(billableDay.getDate());
         Long version = 0L;
         if (recent != null) {
-            billableDay.setVersion(recent.getVersion() + 1);
+            billableDay.setRate(recent.getRate());
+            billableDay.setHours(recent.getHours());
+            billableDay.setDate(recent.getDate());
+            billableDay.setDescription(recent.getDescription());
         }
         return billableDayRepository.save(billableDay);
     }
