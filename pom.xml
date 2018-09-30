@@ -33,6 +33,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -62,40 +71,12 @@
         </dependency>
 
         <!--jsf dependency-->
-        <dependency>
-            <groupId>org.apache.myfaces.core</groupId>
-            <artifactId>myfaces-impl</artifactId>
-            <version>2.2.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.myfaces.core</groupId>
-            <artifactId>myfaces-api</artifactId>
-            <version>2.2.12</version>
-        </dependency>
+        <!--
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.ocpsoft.rewrite</groupId>
-            <artifactId>rewrite-servlet</artifactId>
-            <version>3.4.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ocpsoft.rewrite</groupId>
-            <artifactId>rewrite-integration-faces</artifactId>
-            <version>3.4.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ocpsoft.rewrite</groupId>
-            <artifactId>rewrite-config-prettyfaces</artifactId>
-            <version>3.4.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>6.1</version>
-        </dependency>
+-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -110,7 +91,9 @@
         <!-- plugins... -->
 
         <plugins>
-            <plugin>
+            <plugin><!-- Include if you want to make an executable jar[FAT JAR which
+					includes all dependencies along with sprinboot loader] that you can run on
+					commandline using java -jar NAME -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>

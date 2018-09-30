@@ -6,16 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ro.jmind.model.BillableDay;
 import ro.jmind.model.Timesheet;
 import ro.jmind.repo.TimesheetRepository;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
 
 @Controller
 @RequestMapping(path = "/Timesheet")

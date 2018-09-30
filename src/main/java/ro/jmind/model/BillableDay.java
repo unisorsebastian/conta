@@ -10,7 +10,6 @@ import javax.persistence.Version;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.Objects;
 
 @Entity
@@ -27,7 +26,7 @@ public class BillableDay implements Comparable<BillableDay> {
     @Version
     private Long version;
 
-    private BillableDay() {
+    public BillableDay() {
     }
 
     public BillableDay(LocalDate date, String hours, String rate, String description) {

@@ -1,23 +1,25 @@
 package ro.jmind.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ro.jmind.model.BillableDay;
 import ro.jmind.repo.BillableDayRepository;
 import ro.jmind.repo.BillableDayRepositoryCustom;
+import ro.jmind.service.BillableDayService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@Controller
+@RestController
 @RequestMapping(path = "/BillableDay")
 public class BillableDayController {
     private BillableDayRepository billableDayRepository;
     private BillableDayRepositoryCustom<BillableDay> billableDayRepositoryCustom;
+    private BillableDayService billableDayService;
 
-    public BillableDayController(BillableDayRepository billableDayRepository, BillableDayRepositoryCustom<BillableDay> billableDayRepositoryCustom) {
+    public BillableDayController(BillableDayRepository billableDayRepository, BillableDayRepositoryCustom<BillableDay> billableDayRepositoryCustom, BillableDayService billableDayService) {
         this.billableDayRepository = billableDayRepository;
         this.billableDayRepositoryCustom = billableDayRepositoryCustom;
+        this.billableDayService = billableDayService;
     }
 
     @PostMapping("")
@@ -27,10 +29,15 @@ public class BillableDayController {
         return save;
     }
 
+    @PutMapping("/{id}")
+    BillableDay updateBillableDay(@RequestBody BillableDay billableDay, @PathVariable Long id) {
+        BillableDay save = billableDayService.update(billableDay);
+        return save;
+    }
     @GetMapping(path = "")
     public @ResponseBody
-    Iterable<BillableDay> findAllBillableDayLatestVersion() {
-        return billableDayRepositoryCustom.findAll();
+    Iterable<BillableDay> findAll() {
+        return billableDayService.findAllBillableDayLatestVersion();
     }
 
     @GetMapping(path = "/date/{dateAsString}")
