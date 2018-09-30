@@ -2,7 +2,8 @@ var app = angular.module('crudApp', ['ui.router', 'ngStorage']);
 
 app.constant('urls', {
     BASE: 'http://localhost:8080',
-    BILLABLE_DAY_API: 'http://localhost:8080/BillableDay/'
+    BILLABLE_DAY_API: 'http://localhost:8080/BillableDay/',
+    TIMESHEET_API: 'http://localhost:8080/Timesheet/'
 });
 
 app.config(['$stateProvider', '$urlRouterProvider',
@@ -15,7 +16,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 controller: 'BillableDayController',
                 controllerAs: 'ctrl',
                 resolve: {
-                    users: function ($q, BillableDayService) {
+                    billableDay: function ($q, BillableDayService) {
                         console.log('Load all billableDays');
                         var deferred = $q.defer();
                         BillableDayService.loadAllUsers().then(deferred.resolve, deferred.resolve);
