@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AppController {
 
 	@RequestMapping("/")
-	String home(ModelMap modal) {
-		modal.addAttribute("title","CRUD Example");
+	String home(ModelMap model) {
+		model.addAttribute("title","model map attribute");
 		return "index";
 	}
 
