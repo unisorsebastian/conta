@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Controller
-@RequestMapping(path = "/ExchangeRate")
+@RequestMapping(path = "api/exchangeRate")
 public class ExchangeRateController {
     private ExchangeRateRepository exchangeRateRepository;
     private ExchangeRateRepositoryCustom exchangeRateRepositoryCustom;

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Controller
-@RequestMapping(path = "/Timesheet")
+@RequestMapping(path = "api/timesheet")
 public class TimesheetController {
     private TimesheetRepository timesheetRepository;
 

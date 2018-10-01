@@ -12,7 +12,7 @@ import java.io.IOException;
 
 
 @Controller
-@RequestMapping(path = "/Excel")
+@RequestMapping(path = "api/excel")
 public class ExcelController {
     private ExcelService excelService;
 

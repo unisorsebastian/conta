@@ -10,7 +10,7 @@ import ro.jmind.repo.InvoiceRepository;
 import ro.jmind.repo.InvoiceRepositoryCustom;
 
 @Controller
-@RequestMapping(path = "/Invoice")
+@RequestMapping(path = "api/invoice")
 public class InvoiceController {
 
     @Autowired

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @RestController
-@RequestMapping(path = "/BillableDay")
+@RequestMapping(path = "api/billableDay")
 public class BillableDayController {
     private BillableDayRepository billableDayRepository;
     private BillableDayRepositoryCustom<BillableDay> billableDayRepositoryCustom;
