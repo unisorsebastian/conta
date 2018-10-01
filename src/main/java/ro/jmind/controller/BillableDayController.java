@@ -30,7 +30,7 @@ public class BillableDayController {
     }
 
     @PutMapping("/{id}")
-    BillableDay updateBillableDay(@RequestBody BillableDay billableDay, @PathVariable Long id) {
+    BillableDay updateBillableDay(@RequestBody BillableDay billableDay) {
         BillableDay save = billableDayService.update(billableDay);
         return save;
     }

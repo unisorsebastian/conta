@@ -54,9 +54,9 @@ angular.module('crudApp').controller('BillableDayController',
         }
 
 
-        function updateUser(user, id) {
+        function updateUser(user) {
             console.log('About to update billableDay');
-            BillableDayService.updateUser(user, id)
+            BillableDayService.updateUser(user)
                 .then(
                     function (response) {
                         console.log('User updated successfully');

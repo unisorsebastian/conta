@@ -1,34 +1,13 @@
 <div class="generic-container">
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><span class="lead">Billable Day </span></div>
+        <div class="panel-heading"><span class="lead">Timesheet </span></div>
         <div class="panel-body">
             <div class="formcontainer">
                 <div class="alert alert-success" role="alert" ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
                 <div class="alert alert-danger" role="alert" ng-if="ctrl.errorMessage">{{ctrl.errorMessage}}</div>
                 <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
-                    <input type="hidden" ng-model="ctrl.billableDay.id"/>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label class="col-md-2 control-lable" for="uname">Date</label>
-                            <div class="col-md-7">
-                            <#--<input type="text" ng-model="ctrl.billableDay.date" id="date" class="username form-control input-sm" placeholder="Date" required ng-minlength="3"/>-->
-                                <input type="text" ng-model="ctrl.billableDay.date" id="date"
-                                       class="username form-control input-sm" placeholder="Date"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label class="col-md-2 control-lable" for="age">Hours</label>
-                            <div class="col-md-7">
-                            <#--<input type="text" ng-model="ctrl.billableDay.hours" id="hours" class="form-control input-sm" placeholder="Enter your Age." required ng-pattern="ctrl.onlyIntegers"/>-->
-                                <input type="text" ng-model="ctrl.billableDay.hours" id="hours"
-                                       class="form-control input-sm" placeholder="Enter number of hours"/>
-                            </div>
-                        </div>
-                    </div>
+                    <input ng-model="ctrl.timesheet.date"/>
 
                     <div class="row">
                         <div class="form-group col-md-12">
@@ -60,6 +39,7 @@
                             </button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -83,24 +63,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="u in ctrl.getAllUsers()">
-                        <td>{{u.id}}</td>
-                        <td>{{u.date}}</td>
-                        <td>{{u.hours}}</td>
-                        <td>{{u.rate}}</td>
-                        <td>{{u.description}}</td>
-                        <td>{{u.version}}</td>
-                        <td>
-                            <button type="button" ng-click="ctrl.editUser(u.id)" class="btn btn-success custom-width">
-                                Edit
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" ng-click="ctrl.removeUser(u.id)" class="btn btn-danger custom-width">
-                                Remove
-                            </button>
-                        </td>
-                    </tr>
+                    <#--<tr ng-repeat="u in ctrl.getTimesheet('2018-08-01').getBillableDays()">-->
+                        <#--<td>{{u.id}}</td>-->
+                        <#--<td>{{u.date}}</td>-->
+                        <#--<td>{{u.hours}}</td>-->
+                        <#--<td>{{u.rate}}</td>-->
+                        <#--<td>{{u.description}}</td>-->
+                        <#--<td>{{u.version}}</td>-->
+                        <#--<td>-->
+                            <#--<button type="button" ng-click="ctrl.editUser(u.id)" class="btn btn-success custom-width">-->
+                                <#--Edit-->
+                            <#--</button>-->
+                        <#--</td>-->
+                        <#--<td>-->
+                            <#--<button type="button" ng-click="ctrl.removeUser(u.id)" class="btn btn-danger custom-width">-->
+                                <#--Remove-->
+                            <#--</button>-->
+                        <#--</td>-->
+                    <#--</tr>-->
                     </tbody>
                 </table>
             </div>

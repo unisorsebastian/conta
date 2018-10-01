@@ -13,8 +13,8 @@ angular.module('crudApp').controller('TimesheetController',
         self.errorMessage = '';
         self.done = false;
 
-        function getTimesheet() {
-            return TimesheetService.getTimesheet();
+        function getTimesheet(date) {
+            return TimesheetService.getTimesheet(date);
         }
 
         // function getBillableDays() {

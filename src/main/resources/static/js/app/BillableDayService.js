@@ -71,10 +71,10 @@ angular.module('crudApp').factory('BillableDayService',
                 return deferred.promise;
             }
 
-            function updateUser(billableDay, id) {
-                console.log('Updating User with id ' + id);
+            function updateUser(billableDay) {
+                console.log('Updating User with id ' + billableDay.id);
                 var deferred = $q.defer();
-                $http.put(urls.BILLABLE_DAY_API + id, billableDay)
+                $http.put(urls.BILLABLE_DAY_API + billableDay.id, billableDay)
                     .then(
                         function (response) {
                             loadAllUsers();

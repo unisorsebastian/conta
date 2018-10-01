@@ -19,7 +19,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
                     billableDay: function ($q, TimesheetService) {
                         console.log('Load all timesheet data');
                         var deferred = $q.defer();
-                        TimesheetService.loadAllUsers().then(deferred.resolve, deferred.resolve);
+                        TimesheetService.getTimesheet("2018-08-01").then(deferred.resolve, deferred.resolve);
                         return deferred.promise;
                     }
                 }
