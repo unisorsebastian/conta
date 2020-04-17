@@ -1,5 +1,6 @@
 package ro.jmind.app;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.List;
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 import static org.junit.Assert.assertEquals;
 
+@Ignore
 public class BillingTest {
 
 //    @Test

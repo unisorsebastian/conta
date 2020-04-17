@@ -45,7 +45,6 @@ public class ExcelService {
         FileInputStream stream = new FileInputStream(billTemplateLocation);
         XSSFWorkbook workbook = new XSSFWorkbook(stream);
         XSSFSheet billTemplateSheet = workbook.getSheet(billSheet);
-
         String invoiceNumberValue = invoice.getInvoiceNumber().getNumber().toString();
         String invoiceNumberSeriesValue = invoice.getInvoiceNumber().getSeries();
         String invoiceDateValue = invoice.getDate().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
